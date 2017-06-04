@@ -49,6 +49,7 @@ public class absen extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -61,12 +62,13 @@ public class absen extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         tanggal = new com.toedter.calendar.JDateChooser();
         jLabel6 = new javax.swing.JLabel();
-        s = new javax.swing.JRadioButton();
-        i = new javax.swing.JRadioButton();
-        a = new javax.swing.JRadioButton();
+        sakit = new javax.swing.JRadioButton();
+        izin = new javax.swing.JRadioButton();
+        alpha = new javax.swing.JRadioButton();
         nama = new javax.swing.JTextField();
         nis = new javax.swing.JTextField();
         absen = new javax.swing.JComboBox<>();
+        hadir = new javax.swing.JRadioButton();
         simpan = new javax.swing.JButton();
         bersihkan = new javax.swing.JButton();
         hapus = new javax.swing.JButton();
@@ -134,31 +136,39 @@ public class absen extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
         jLabel6.setText("Keterangan");
 
-        buttonGroup1.add(s);
-        s.setText("Sakit");
-        s.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(sakit);
+        sakit.setText("Sakit");
+        sakit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sActionPerformed(evt);
+                sakitActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(i);
-        i.setText("Izin");
-        i.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(izin);
+        izin.setText("Izin");
+        izin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                iActionPerformed(evt);
+                izinActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(a);
-        a.setText("Alpha");
-        a.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(alpha);
+        alpha.setText("Alpha");
+        alpha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aActionPerformed(evt);
+                alphaActionPerformed(evt);
             }
         });
 
         absen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36" }));
+
+        buttonGroup1.add(hadir);
+        hadir.setText("Hadir");
+        hadir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hadirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -168,12 +178,14 @@ public class absen extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(s)
-                        .addGap(18, 18, 18)
-                        .addComponent(a)
-                        .addGap(18, 18, 18)
-                        .addComponent(i)
-                        .addGap(0, 51, Short.MAX_VALUE))
+                        .addComponent(sakit)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(alpha)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(izin)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(hadir)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
@@ -181,7 +193,7 @@ public class absen extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(absen, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(nama)
@@ -212,9 +224,10 @@ public class absen extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(s)
-                    .addComponent(a)
-                    .addComponent(i))
+                    .addComponent(sakit)
+                    .addComponent(alpha)
+                    .addComponent(izin)
+                    .addComponent(hadir))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
 
@@ -261,9 +274,17 @@ public class absen extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Absen", "NIS", "Nama", "Tanggal", "Keterangan"
+                "Absen", "Nis", "Nama", "Tanggal", "Keterangan"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(Tabel);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -328,17 +349,17 @@ public class absen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void sActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sActionPerformed
+    private void sakitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sakitActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_sActionPerformed
+    }//GEN-LAST:event_sakitActionPerformed
 
-    private void iActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iActionPerformed
+    private void izinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_izinActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_iActionPerformed
+    }//GEN-LAST:event_izinActionPerformed
 
-    private void aActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aActionPerformed
+    private void alphaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alphaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_aActionPerformed
+    }//GEN-LAST:event_alphaActionPerformed
 
     private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
         // TODO add your handling code here:
@@ -379,7 +400,7 @@ public class absen extends javax.swing.JFrame {
         // TODO add your handling code here:
                                              
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String Tanggal = dateFormat.format(tanggal.getDate());
+        String ctanggal = dateFormat.format(tanggal.getDate());
 
         Date masuk = tanggal.getDate();
         
@@ -388,19 +409,21 @@ public class absen extends javax.swing.JFrame {
         String Nama = nama.getText();
         String Keterangan = "";
         
-        if (s.isSelected()) {
+        if (sakit.isSelected()){
             Keterangan = "Sakit";
-        } else if(a.isSelected()) {
-            Keterangan = "Alpha";
-        } else {
-            Keterangan = "Izin";}
+        } else if (alpha.isSelected()){
+            Keterangan = "Alpha";            
+        } else if (izin.isSelected()){
+            Keterangan = "Izin";
+        }else {
+            Keterangan = "Hadir";
+        }
 
-        if (absen.equals("") || nis.equals("") || nama.equals("") || Keterangan.equals("")){
-
+        if (Nis.equals("") || Nama.equals("")){
             JOptionPane.showMessageDialog(this, "Data tidak Lengkap!", "MAAF", JOptionPane.WARNING_MESSAGE);
         }else{
-            String SQL ="INSERT INTO tb_data (nama,resi,polisi,jenis,masuk,keluar,harga,hargatotal)"
-            + "VALUES('"+Absen+"','"+nis.getText()+"','"+nama.getText()+"','"+tanggal+"','"+Keterangan+"')";
+            String SQL ="INSERT INTO tb_data (absen,nis,nama,tanggal,keterangan)"
+            + "VALUES('"+Absen+"','"+nis.getText()+"','"+nama.getText()+"','"+ctanggal+"','"+Keterangan+"')";
             int status = DB.execute(SQL);
             if (status == 1) {
                 JOptionPane.showMessageDialog(this, "Berhasil!","Sukses", JOptionPane.INFORMATION_MESSAGE);
@@ -416,8 +439,8 @@ public class absen extends javax.swing.JFrame {
         // TODO add your handling code here:
         int baris = Tabel.getSelectedRow();
         if (baris != -1) {
-            String Polisi = Tabel.getValueAt(baris, 2).toString();
-            String SQL = "DELETE FROM tb_data WHERE nis='"+nis+"'";
+            String Nis = Tabel.getValueAt(baris, 2).toString();
+            String SQL = "DELETE FROM tb_data WHERE nama='"+Nis+"'";
             int status = DB.execute(SQL);
             if (status==1){
                 JOptionPane.showMessageDialog(this, "Data berhasil dihapus", "Sukses", JOptionPane.INFORMATION_MESSAGE);
@@ -429,6 +452,10 @@ public class absen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Pilih Baris Data Terlebih dahulu", "Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_hapusActionPerformed
+
+    private void hadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hadirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_hadirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -469,12 +496,14 @@ public class absen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Tabel;
-    private javax.swing.JRadioButton a;
     private javax.swing.JComboBox<String> absen;
+    private javax.swing.JRadioButton alpha;
     private javax.swing.JButton bersihkan;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JRadioButton hadir;
     private javax.swing.JButton hapus;
-    private javax.swing.JRadioButton i;
+    private javax.swing.JRadioButton izin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -491,7 +520,7 @@ public class absen extends javax.swing.JFrame {
     private javax.swing.JTextField nis;
     private javax.swing.JButton print;
     private javax.swing.JButton refresh;
-    private javax.swing.JRadioButton s;
+    private javax.swing.JRadioButton sakit;
     private javax.swing.JButton simpan;
     private com.toedter.calendar.JDateChooser tanggal;
     // End of variables declaration//GEN-END:variables
@@ -529,26 +558,29 @@ public class absen extends javax.swing.JFrame {
     }
 
     public void selectData() {
-        String kolom[] = {"Nama","Resi","Polisi","Jk","Masuk","Keluar","Harga","Total"};
+        String kolom[] = {"Absen","NIS","Nama","Tanggal","Keterangan"};
         DefaultTableModel dtm = new DefaultTableModel(null, kolom);
         String SQL = "SELECT * FROM tb_data";
         ResultSet rs = DB.executeQuery(SQL);
         try {
             while(rs.next()) {
-                String Nama = rs.getString(1);
-                String Resi = rs.getString(2);
-                String Polisi = rs.getString(3);
-                String JK = "";
-                if ("Motor".equals(rs.getString(4))){
-                    JK = "Motor";
-                } else {
-                    JK = "Mobil";
+                String Absen = rs.getString(1);
+                String NIS = rs.getString(2);
+                String Nama = rs.getString(3);
+                String Tanggal = rs.getString(4);
+                String Keterangan = "";
+                
+                if (sakit.isSelected()) {
+                Keterangan = "Sakit";
+                } else if(alpha.isSelected()){
+                Keterangan = "Alpha";                
+                }else if(izin.isSelected()){
+                Keterangan = "Izin";
+                } else if(hadir.isSelected()){
+                Keterangan = "Hadir";
                 }
-                String Masuk = rs.getString(5);
-                String Keluar = rs.getString(6);
-                String Harga = rs.getString(7);
-                String Total = rs.getString(8);
-                String data[] = {Nama,Resi,Polisi,JK,Masuk,Keluar,Harga,Total};
+                
+                String data[] = {Absen,NIS,Nama,Tanggal,Keterangan};
                 dtm.addRow(data);
             }
         } catch (SQLException ex){
